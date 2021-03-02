@@ -151,11 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Gracz.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Silnik.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Biblioteki.h" />
+    <ClInclude Include="Gracz.h" />
     <ClInclude Include="Silnik.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

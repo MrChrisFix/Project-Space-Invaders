@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Biblioteki.h"
+#include "Gracz.h"
 
 #include <map>
 
@@ -15,12 +16,16 @@ class Silnik
 	sf::RenderWindow* window;
 	sf::Event ev;
 
+	Gracz* gracz;
+
 	//Zasoby
-	std::map<std::string, sf::Texture> textures;
+	std::map<std::string, sf::Texture*> textures;
 
 	//Funckje prywatne
 	void initVariables();
 	void initWindow();
+	void initGracz();
+	void loadTextures();
 
 
 public:

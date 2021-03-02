@@ -14,11 +14,24 @@ void Silnik::initWindow()
     this->window->setVerticalSyncEnabled(false);
 }
 
+void Silnik::initGracz()
+{
+	gracz = new Gracz(textures["STATEK_GRACZA"]);
+}
+
+void Silnik::loadTextures()
+{
+	this->textures["STATEK_GRACZA"] = new sf::Texture();
+	this->textures["STATEK_GRACZA"]->loadFromFile("Textures/ship.png");
+}
+
 Silnik::Silnik()
 {
 
     this->initVariables();
     this->initWindow();
+	this->loadTextures();
+	this->initGracz();
 
 }
 
@@ -26,6 +39,11 @@ Silnik::~Silnik()
 {
     delete this->window;
 
+	//Usuwanie tekstur
+	for (auto &i : textures)
+	{
+		delete i.second;
+	}
 }
 
 bool Silnik::isRunning()
@@ -68,7 +86,7 @@ void Silnik::render()
 
 	//Rysowanie
 
-
+	this->gracz->render(*this->window);
 
 	//Wyswietlanie
 	this->window->display();
