@@ -1,0 +1,2 @@
+C:\Users\Christian\source\repos\Projekt-Space-Invaders\Space Invaders\Debug\Space Invaders.exe
+C:\Users\Christian\source\repos\Projekt-Space-Invaders\Space Invaders\Debug\Space Invaders.pdb
