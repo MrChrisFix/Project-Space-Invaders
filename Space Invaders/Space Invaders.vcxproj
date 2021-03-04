@@ -151,12 +151,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Gracz.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Silnik.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Biblioteki.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Gracz.h" />
     <ClInclude Include="Silnik.h" />
   </ItemGroup>
