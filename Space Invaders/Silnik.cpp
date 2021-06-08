@@ -1,9 +1,10 @@
 #include "Silnik.h"
 
-
 void Silnik::initVariables()
 {
     this->window = nullptr;
+
+	this->punkty = 0;
 }
 
 void Silnik::initWindow()
@@ -14,51 +15,45 @@ void Silnik::initWindow()
     this->window->setVerticalSyncEnabled(false);
 }
 
-void Silnik::initGracz()
+void Silnik::initMenu()
 {
-	gracz = new Gracz(textures["STATEK_GRACZA"]);
+	this->Menus = new MenuManager(&this->Czcionka, this->window);
+
+	this->Gra = new InGame(&this->WindowHeight, &this->WindowLength, &this->Czcionka);
+
+
+	Odczyt_Zapis* temp = new Odczyt_Zapis(&this->Czcionka, this->window);
+	this->Menus->setOZ(temp);
+	this->Gra->setOZ(temp);
+	temp = nullptr;
 }
 
-void Silnik::loadTextures()
+void Silnik::loadFont()
 {
-	//TODO: sprawdzenie czy tekstury siê za³adowa³y
-
-	this->textures["STATEK_GRACZA"] = new sf::Texture();
-	this->textures["STATEK_GRACZA"]->loadFromFile("Textures/Ship1.png"); /////
-
-	this->textures["RED_ALIEN"] = new sf::Texture();
-	this->textures["RED_ALIEN"]->loadFromFile("Textures/Red_Alien1.png");
-
-	this->textures["POCISK_GRACZA"] = new sf::Texture();
-	this->textures["POCISK_GRACZA"]->loadFromFile("Textures/Player_Bullet.png");
+	if (!this->Czcionka.loadFromFile("Font/PressStart2P-Regular.ttf"))
+	{
+		std::cout << "Nie zaladowano czcionki!\n";
+		this->window->close();
+	}
 }
 
 Silnik::Silnik()
 {
 
+	this->loadFont();
     this->initVariables();
     this->initWindow();
-	this->loadTextures();
-	this->initGracz();
 
+	this->initMenu();
 }
 
 Silnik::~Silnik()
 {
     delete this->window;
 
-	delete this->gracz;
+	delete this->Menus;
 
-	//Usuwanie tekstur
-	for (auto &i : this-> textures)
-	{
-		delete i.second;
-	}
-	//Usuwanie pociskow
-	for (auto &i : this->pociki)
-	{
-		delete i;
-	}
+	delete this->Gra;
 }
 
 bool Silnik::isRunning()
@@ -72,14 +67,25 @@ void Silnik::pollEvent()
 	{
 		switch (this->ev.type)
 		{
-			//zamykanie okna
+			//Zamykanie okna
 		case sf::Event::Closed:
+		{
 			this->window->close();
 			break;
+		}
 		case sf::Event::KeyPressed:
+		{
 			if (this->ev.key.code == sf::Keyboard::Escape)
-				this->window->close();
+			{
+				this->Menus->Escape();
+			}
 			break;
+		}
+		case sf::Event::TextEntered:
+		{
+			this->Menus->Text(this->ev);
+			break;
+		}
 
 		default:
 			break;
@@ -88,47 +94,46 @@ void Silnik::pollEvent()
     
 }
 
-void Silnik::updatePlayer()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		this->gracz->move(-1.f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		this->gracz->move(1.f);
-
-
-}
-
-void Silnik::updateBullets()
-{
-   	for (auto& i : this->pociki)
-		i->move();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->gracz->canAttack())
-		this->pociki.push_back(new Bullet(this->textures["POCISK_GRACZA"], true, this->gracz->getGBounds().left+this->gracz->getGBounds().width/2, this->gracz->getGBounds().top));
-
-	unsigned short int licznik = 0;
-	for (auto& i : this->pociki)
-	{
-		if (i->getGBounds().top + i->getGBounds().height < 0 || i->getGBounds().top > this->WindowHeight)
-		{
-			delete i;
-			this->pociki.erase(this->pociki.begin() + licznik);
-			licznik--;
-
-		}
-		licznik++;
-	}
-
-}
-
-
 void Silnik::update()
 {
 	this->pollEvent();
-	this->updatePlayer();
-	this->updateBullets();
 
-	this->gracz->update();
+	switch (Menus->update())
+
+	{
+	case 0: //Gra
+	{
+		this->Gra->update();
+
+		if (this->Gra->GameOver())
+		{
+			this->Menus->koniecGry(this->Gra->getWynik());
+		}
+		break;
+	}
+	case 1: // Zamknij okno
+	{
+		this->window->close();
+		break;
+	}
+	case 2: //reset game
+	{
+		this->Gra->resetGame();
+		break;
+	}
+	case 3: //Zapis gry
+	{
+		this->Gra->zapisz();
+		break;
+	}
+	case 4: //Odczyt gry
+	{
+		this->Gra->wczytaj();
+		break;
+	}
+	default:
+		break;
+	}
 
 }
 
@@ -138,13 +143,11 @@ void Silnik::render()
 	this->window->clear();
 
 	//Rysowanie
-
-	this->gracz->render(*this->window);
-
-	for (auto &i : this->pociki)
-		i->render(*this->window);
+	if (this->Menus->render())
+	{
+		this->Gra->render(*this->window);
+	}
 
 	//Wyswietlanie
 	this->window->display();
-	
 }

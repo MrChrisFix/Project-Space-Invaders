@@ -1,33 +1,36 @@
 #pragma once
+#include "Entity.h"
+#include "Timer.h"
 
-#include "Biblioteki.h"
-
-class Gracz
+class Gracz : public Entity
 {
-protected:
-	sf::Texture* texture;
-	sf::Sprite sprite;
-	const short int MOVEMENT_SPEED = 10;
-	const short int ATTACK_COOLDOWN = 50;
-	short int CURRENT_COOLDOWN;
+	const short int MOVEMENT_SPEED = 5;
 
-	//Prywatne funkcje
-	void initSprite();
-	void updateCooldown();
+	Timer cooldown;
+
+	//Elementy rozgrywki
+	short int zycia;
 
 public:
-	Gracz(sf::Texture* texture_);
+	Gracz(sf::Texture* texture_, float posX, float posY);
+	Gracz(sf::Texture* texture_, float posX, float posY, short int zycia_);
 	~Gracz();
 
 	void update();
-	void render(sf::RenderTarget &target);
 
 	void move(float dirX);
 
-	sf::FloatRect getGBounds();
-
 	bool canAttack();
 
+	//Elementy rozgrywki
+
+	short int getZycia();
+
+	void stracZycie();
+
+	void restartStats();
+
+	void setNew(float posX, float posY, short int zycia_);
 
 };
 

@@ -1,2 +1,4 @@
 C:\Users\Christian\source\repos\Projekt-Space-Invaders\Space Invaders\Debug\Space Invaders.exe
 C:\Users\Christian\source\repos\Projekt-Space-Invaders\Space Invaders\Debug\Space Invaders.pdb
+E:\C++\Visual Studio\source\repos\Projekt-Space-Invaders\Space Invaders\Debug\Space Invaders.exe
+E:\C++\Visual Studio\source\repos\Projekt-Space-Invaders\Space Invaders\Debug\Space Invaders.pdb

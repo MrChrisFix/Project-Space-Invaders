@@ -1,6 +1,1 @@
-﻿  Gracz.cpp
-  Silnik.cpp
-  main.cpp
-C:\Users\Christian\source\repos\Projekt-Space-Invaders\Space Invaders\main.cpp(1,10): warning C4067: nieoczekiwane tokeny występujące po dyrektywie preprocesora - oczekiwano nowego wiersza
-  Generowanie kodu...
-  Space Invaders.vcxproj -> C:\Users\Christian\Source\Repos\Projekt-Space-Invaders\Space Invaders\Debug\Space Invaders.exe
+﻿  Space Invaders.vcxproj -> E:\C++\Visual Studio\source\repos\Projekt-Space-Invaders\Space Invaders\Debug\Space Invaders.exe

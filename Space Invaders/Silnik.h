@@ -1,33 +1,37 @@
 #pragma once
 
-#include "Biblioteki.h"
-#include "Gracz.h"
-#include "Bullet.h"
+#include "MainMenu.h"
+#include "PauseMenu.h"
+#include "ZapisWyniku.h"
+#include "InGame.h"
 
-#include <map>
-#include <vector>
+#include <iostream>
+#include "MenuManager.h"
 
 class Silnik
 {
 	//Zmienne
 	const short int WindowHeight = 720, WindowLength = 1280;
 
+	int punkty;
+
 
 	//Obiekty
 	sf::RenderWindow* window;
 	sf::Event ev;
 
-	Gracz* gracz;
+	InGame* Gra;
+	MenuManager* Menus;
 
 	//Zasoby
-	std::map<std::string, sf::Texture*> textures;
-	std::vector<Bullet*> pociki;
+	sf::Font Czcionka;
 
 	//Funckje prywatne
 	void initVariables();
 	void initWindow();
-	void initGracz();
-	void loadTextures();
+	void initMenu();
+
+	void loadFont();
 
 
 public:
@@ -38,11 +42,8 @@ public:
 
 
 	void pollEvent();
-	void updatePlayer();
-	void updateBullets();
 	void update();
 
 	void render();
 
 };
-

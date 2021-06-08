@@ -1,27 +1,22 @@
 #pragma once
-#include "Biblioteki.h"
+#include "Entity.h"
 
-class Bullet
+class Bullet : public Entity
 {
-	sf::Texture* texture;
-	sf::Sprite sprite;
 	short int MOVEMENT_SPEED;
 
-	//Prywatne funckje
-	void initSprite(float posX, float posY);
-
+	bool player_bullet;
 
 public:
 
-	Bullet(sf::Texture* texture_, bool player_bullet, float posX, float posY);
+	Bullet(sf::Texture* texture_, bool player_bullet_, float posX, float posY);
 	~Bullet();
 
-	void update();
-	void render(sf::RenderTarget& target);
+	void update() override;
 
 	void move();
 
-	sf::FloatRect getGBounds();
+	bool isPlayerBullet();
 
 };
 

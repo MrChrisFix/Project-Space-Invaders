@@ -1,0 +1,6 @@
+Halo 225
+win 225
+wygrana 225
+Christian 43
+Test 31
+Przegrana 6

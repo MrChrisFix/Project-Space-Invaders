@@ -152,15 +152,42 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Gracz.cpp" />
+    <ClCompile Include="InGame.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="MenuType.cpp" />
+    <ClCompile Include="Odczyt_Zapis.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="PlayMenu.cpp" />
+    <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="Silnik.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="ZapisWyniku.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Biblioteki.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Gracz.h" />
+    <ClInclude Include="InGame.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="MenuType.h" />
+    <ClInclude Include="Odczyt_Zapis.h" />
+    <ClInclude Include="Para.h" />
+    <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="PlayMenu.h" />
+    <ClInclude Include="Ranking.h" />
     <ClInclude Include="Silnik.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="ZapisWyniku.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
